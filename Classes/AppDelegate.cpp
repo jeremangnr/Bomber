@@ -16,7 +16,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto eglView = EGLView::getInstance();
 
     director->setOpenGLView(eglView);
-    director->setDisplayStats(true);
     director->setAnimationInterval(1.0 / 60); // 60fps
 
     auto scene = HelloWorld::createScene();

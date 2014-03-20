@@ -11,8 +11,6 @@
 
 #include "cocos2d.h"
 
-#define kMaxHillKeyPoints 20
-
 class Terrain : public cocos2d::Node
 {
 public:
@@ -21,8 +19,9 @@ public:
     
     virtual void draw();
     
+    bool onTouchBegan(cocos2d::Touch *touch);
 private:
-    cocos2d::Point _hillKeyPoints[kMaxHillKeyPoints];
+    std::vector<cocos2d::Point> _hillKeyPoints;
     
     void generateHills();
 };

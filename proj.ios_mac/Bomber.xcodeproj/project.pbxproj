@@ -65,6 +65,7 @@
 		CFBE645B18DBD95500FC3B24 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBE645818DBD95500FC3B24 /* noise.png */; };
 		CFBE645E18DBD9F300FC3B24 /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE645C18DBD9F300FC3B24 /* MathUtils.cpp */; };
 		CFBE646418DBDA9500FC3B24 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE646218DBDA9500FC3B24 /* VisibleRect.cpp */; };
+		CFBE646718DBE18000FC3B24 /* DynamicTerrainTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -297,6 +298,8 @@
 		CFBE645D18DBD9F300FC3B24 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtils.h; path = ../Classes/Utils/Math/MathUtils.h; sourceTree = "<group>"; };
 		CFBE646218DBDA9500FC3B24 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/Utils/Layout/VisibleRect.cpp; sourceTree = "<group>"; };
 		CFBE646318DBDA9500FC3B24 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/Utils/Layout/VisibleRect.h; sourceTree = "<group>"; };
+		CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DynamicTerrainTexture.cpp; path = ../Classes/DynamicTerrainTexture.cpp; sourceTree = "<group>"; };
+		CFBE646618DBE18000FC3B24 /* DynamicTerrainTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTerrainTexture.h; path = ../Classes/DynamicTerrainTexture.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -377,6 +380,8 @@
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				CFBAF96A18D929B200E1E4AE /* Terrain.cpp */,
 				CFBAF96B18D929B200E1E4AE /* Terrain.h */,
+				CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */,
+				CFBE646618DBE18000FC3B24 /* DynamicTerrainTexture.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -779,6 +784,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CFBE645E18DBD9F300FC3B24 /* MathUtils.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				CFBE646718DBE18000FC3B24 /* DynamicTerrainTexture.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				CFBE646418DBDA9500FC3B24 /* VisibleRect.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,

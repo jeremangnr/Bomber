@@ -11,5 +11,5 @@
 
 int MathUtils::randIntInRange(int min, int max)
 {
-    return min + (rand() % (int)(max - min + 1));
+    return min + (arc4random() % (int)(max - min + 1));
 }

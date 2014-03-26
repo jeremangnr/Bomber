@@ -39,15 +39,16 @@ assets/
 # Ignore files build by airplay
 build_*_xcode/
 
-# Ignore files build by xcode3
+# Ignore files build by xcode
 *.mode*v*
 *.pbxuser
-build/
-.DS_Store
-
-# Ignore files by xcode4
+*.xcbkptlist
 *.xcscheme
 *.xcworkspacedata
 *.xcuserstate
-xcschememanagement.*
+*.xccheckout
+xcschememanagement.plist
+.DS_Store
+._.*
 xcuserdata/
+DerivedData/

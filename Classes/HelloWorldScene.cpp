@@ -1,6 +1,10 @@
 #include "HelloWorldScene.h"
 #include "Terrain.h"
 
+#include "DynamicTerrainSprite.h"
+#include "VisibleRect.h"
+#include "ColorUtils.h"
+
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
@@ -18,9 +22,13 @@ bool HelloWorld::init()
     if (!Layer::init()) return false;
 
     auto terrain = new Terrain();
-    terrain->setPosition(Point(0, 0));
+    terrain->setPosition(Point::ZERO);
     
-    this->addChild(terrain, 0);
+    auto bg = DynamicTerrainSprite::createWithSizeColor(Size(VisibleRect::width(), VisibleRect::height()), ColorUtils::randomBrightColor());
+    bg->setPosition(VisibleRect::center());
+    
+    this->addChild(bg, 0);
+    this->addChild(terrain, 1);
     
     return true;
 }

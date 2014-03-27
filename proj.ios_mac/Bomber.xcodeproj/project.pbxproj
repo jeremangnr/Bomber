@@ -56,16 +56,15 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		A73E95EE18E3643D007D38E0 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A73E95EC18E3643D007D38E0 /* ColorUtils.cpp */; };
+		A73E960418E3AF3B007D38E0 /* iphone in Resources */ = {isa = PBXBuildFile; fileRef = A73E960318E3AF3B007D38E0 /* iphone */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		CFBAF96C18D929B200E1E4AE /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBAF96A18D929B200E1E4AE /* Terrain.cpp */; };
-		CFBE645918DBD95500FC3B24 /* noise-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBE645618DBD95500FC3B24 /* noise-hd.png */; };
-		CFBE645A18DBD95500FC3B24 /* noise-iphone5hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBE645718DBD95500FC3B24 /* noise-iphone5hd.png */; };
-		CFBE645B18DBD95500FC3B24 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBE645818DBD95500FC3B24 /* noise.png */; };
 		CFBE645E18DBD9F300FC3B24 /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE645C18DBD9F300FC3B24 /* MathUtils.cpp */; };
 		CFBE646418DBDA9500FC3B24 /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE646218DBDA9500FC3B24 /* VisibleRect.cpp */; };
-		CFBE646718DBE18000FC3B24 /* DynamicTerrainTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */; };
+		CFBE646718DBE18000FC3B24 /* DynamicTerrainSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFBE646518DBE18000FC3B24 /* DynamicTerrainSprite.cpp */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
@@ -286,20 +285,20 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		A73E95EC18E3643D007D38E0 /* ColorUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorUtils.cpp; path = ../Classes/ColorUtils.cpp; sourceTree = "<group>"; };
+		A73E95ED18E3643D007D38E0 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorUtils.h; path = ../Classes/ColorUtils.h; sourceTree = "<group>"; };
+		A73E960318E3AF3B007D38E0 /* iphone */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iphone; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CFBAF96A18D929B200E1E4AE /* Terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Terrain.cpp; path = ../Classes/Terrain.cpp; sourceTree = "<group>"; };
 		CFBAF96B18D929B200E1E4AE /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Classes/Terrain.h; sourceTree = "<group>"; };
-		CFBE645618DBD95500FC3B24 /* noise-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "noise-hd.png"; path = "textures/terrain/noise-hd.png"; sourceTree = "<group>"; };
-		CFBE645718DBD95500FC3B24 /* noise-iphone5hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "noise-iphone5hd.png"; path = "textures/terrain/noise-iphone5hd.png"; sourceTree = "<group>"; };
-		CFBE645818DBD95500FC3B24 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noise.png; path = textures/terrain/noise.png; sourceTree = "<group>"; };
 		CFBE645C18DBD9F300FC3B24 /* MathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MathUtils.cpp; path = ../Classes/Utils/Math/MathUtils.cpp; sourceTree = "<group>"; };
 		CFBE645D18DBD9F300FC3B24 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathUtils.h; path = ../Classes/Utils/Math/MathUtils.h; sourceTree = "<group>"; };
 		CFBE646218DBDA9500FC3B24 /* VisibleRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VisibleRect.cpp; path = ../Classes/Utils/Layout/VisibleRect.cpp; sourceTree = "<group>"; };
 		CFBE646318DBDA9500FC3B24 /* VisibleRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VisibleRect.h; path = ../Classes/Utils/Layout/VisibleRect.h; sourceTree = "<group>"; };
-		CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DynamicTerrainTexture.cpp; path = ../Classes/DynamicTerrainTexture.cpp; sourceTree = "<group>"; };
-		CFBE646618DBE18000FC3B24 /* DynamicTerrainTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTerrainTexture.h; path = ../Classes/DynamicTerrainTexture.h; sourceTree = "<group>"; };
+		CFBE646518DBE18000FC3B24 /* DynamicTerrainSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DynamicTerrainSprite.cpp; path = ../Classes/DynamicTerrainSprite.cpp; sourceTree = "<group>"; };
+		CFBE646618DBE18000FC3B24 /* DynamicTerrainSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTerrainSprite.h; path = ../Classes/DynamicTerrainSprite.h; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -380,8 +379,8 @@
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				CFBAF96A18D929B200E1E4AE /* Terrain.cpp */,
 				CFBAF96B18D929B200E1E4AE /* Terrain.h */,
-				CFBE646518DBE18000FC3B24 /* DynamicTerrainTexture.cpp */,
-				CFBE646618DBE18000FC3B24 /* DynamicTerrainTexture.h */,
+				CFBE646518DBE18000FC3B24 /* DynamicTerrainSprite.cpp */,
+				CFBE646618DBE18000FC3B24 /* DynamicTerrainSprite.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -501,28 +500,19 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CFBE645318DBD86100FC3B24 /* textures */,
+				A73E960318E3AF3B007D38E0 /* iphone */,
 			);
 			name = Resources;
 			path = ../Resources;
 			sourceTree = "<group>";
 		};
-		CFBE645318DBD86100FC3B24 /* textures */ = {
+		A73E95EB18E3640F007D38E0 /* Color */ = {
 			isa = PBXGroup;
 			children = (
-				CFBE645418DBD87000FC3B24 /* terrain */,
+				A73E95EC18E3643D007D38E0 /* ColorUtils.cpp */,
+				A73E95ED18E3643D007D38E0 /* ColorUtils.h */,
 			);
-			name = textures;
-			sourceTree = "<group>";
-		};
-		CFBE645418DBD87000FC3B24 /* terrain */ = {
-			isa = PBXGroup;
-			children = (
-				CFBE645618DBD95500FC3B24 /* noise-hd.png */,
-				CFBE645718DBD95500FC3B24 /* noise-iphone5hd.png */,
-				CFBE645818DBD95500FC3B24 /* noise.png */,
-			);
-			name = terrain;
+			name = Color;
 			sourceTree = "<group>";
 		};
 		CFBE645518DBD92200FC3B24 /* Math */ = {
@@ -546,6 +536,7 @@
 		CFD5890518DAB43800D92786 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A73E95EB18E3640F007D38E0 /* Color */,
 				CFBE646118DBDA8600FC3B24 /* Layout */,
 				CFBE645518DBD92200FC3B24 /* Math */,
 			);
@@ -750,18 +741,16 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
-				CFBE645A18DBD95500FC3B24 /* noise-iphone5hd.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
+				A73E960418E3AF3B007D38E0 /* iphone in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
-				CFBE645918DBD95500FC3B24 /* noise-hd.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
-				CFBE645B18DBD95500FC3B24 /* noise.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,8 +773,9 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				CFBE645E18DBD9F300FC3B24 /* MathUtils.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				CFBE646718DBE18000FC3B24 /* DynamicTerrainTexture.cpp in Sources */,
+				CFBE646718DBE18000FC3B24 /* DynamicTerrainSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				A73E95EE18E3643D007D38E0 /* ColorUtils.cpp in Sources */,
 				CFBE646418DBDA9500FC3B24 /* VisibleRect.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,

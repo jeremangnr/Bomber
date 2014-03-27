@@ -44,7 +44,7 @@ RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Si
         int nVertices = 0;
         
         vertices[nVertices] = Vertex2F(0, 0);
-        colors[nVertices++] = Color4F(0, 0, 0, 0 );
+        colors[nVertices++] = Color4F(0, 0, 0, 0);
         vertices[nVertices] = Vertex2F(size.width, 0);
         colors[nVertices++] = Color4F(0, 0, 0, 0);
         vertices[nVertices] = Vertex2F(0, size.height);
@@ -62,6 +62,9 @@ RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Si
         
         GL::blendFunc( _blendFunc.src, _blendFunc.dst );
         glDrawArrays(GL_TRIANGLE_STRIP, 0, nVertices);
+        
+        CC_INCREMENT_GL_DRAWS(1);
+        CHECK_GL_ERROR_DEBUG();
     }
     
     // add noise

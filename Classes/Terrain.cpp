@@ -34,8 +34,15 @@ Terrain::~Terrain()
 {
 }
 
-#pragma mark - Node Override
+#pragma mark - Overrides
 void Terrain::draw()
+{
+    _customCommand.init(_globalZOrder);
+    _customCommand.func = CC_CALLBACK_0(Terrain::onDraw, this);
+    Director::getInstance()->getRenderer()->addCommand(&_customCommand);
+}
+
+void Terrain::onDraw()
 {
     Point p0 = this->_hillKeyPoints.front();
     

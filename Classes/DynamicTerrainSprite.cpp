@@ -8,6 +8,9 @@
 
 #include "DynamicTerrainSprite.h"
 
+#define kGradientColorStart Color4B(0, 0, 0, 0)
+#define kGradientColorEnd Color4B(0, 0, 0, 170)
+
 USING_NS_CC;
 
 DynamicTerrainSprite* DynamicTerrainSprite::createWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color)
@@ -37,36 +40,6 @@ RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Si
     
     rt->beginWithClear(color.r, color.g, color.b, color.a);
     
-    if (gradient == true) {
-        float gradientAlpha = 0.7;
-        Vertex2F vertices[4];
-        Color4F colors[4];
-        int nVertices = 0;
-        
-        vertices[nVertices] = Vertex2F(0, 0);
-        colors[nVertices++] = Color4F(0, 0, 0, 0);
-        vertices[nVertices] = Vertex2F(size.width, 0);
-        colors[nVertices++] = Color4F(0, 0, 0, 0);
-        vertices[nVertices] = Vertex2F(0, size.height);
-        colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
-        vertices[nVertices] = Vertex2F(size.width, size.height);
-        colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
-        
-        this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_COLOR));
-        CC_NODE_DRAW_SETUP();
-        
-        GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_COLOR);
-        
-        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-        glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
-        
-        GL::blendFunc( _blendFunc.src, _blendFunc.dst );
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, nVertices);
-        
-        CC_INCREMENT_GL_DRAWS(1);
-        CHECK_GL_ERROR_DEBUG();
-    }
-    
     // add noise
     Sprite *noise = Sprite::create("noise.png");
     noise->setBlendFunc({GL_DST_COLOR, GL_ZERO});
@@ -75,6 +48,11 @@ RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Si
     
     rt->end();
     
-    //rt->autorelease();
+    if (gradient == true) {
+        LayerGradient *gradient = LayerGradient::create(kGradientColorStart, kGradientColorEnd);
+        this->addChild(gradient);
+        //gradient->setBlendFunc({GL_SRC_COLOR, GL_DST_COLOR}); // set this for colored gradient
+    }
+    
     return rt;
 }

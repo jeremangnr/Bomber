@@ -20,7 +20,7 @@ public:
     virtual void draw() override;
     virtual void onDraw();
     
-    bool onTouchBegan(cocos2d::Touch *touch);
+    virtual bool onTouchBegan(cocos2d::Touch *touch);
 private:
     std::vector<cocos2d::Point> _hillKeyPoints;
     cocos2d::CustomCommand _customCommand;

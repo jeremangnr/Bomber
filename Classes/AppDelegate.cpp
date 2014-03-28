@@ -23,28 +23,32 @@ bool AppDelegate::applicationDidFinishLaunching() {
     std::vector<std::string> searchPaths;
     
     if (screenSize.width == 1136) {
-        CCLOG("%s", "device is iPhone 5");
+        CCLOG("%s", "Device is iPhone 4 inch\n");
         
-        searchPaths.push_back("iphone5");
+        searchPaths.push_back("iphone_4_retina");
         director->setContentScaleFactor(1136/640);
     } else if (screenSize.width == 960) {
-        CCLOG("%s", "device is iPhone Retina");
+        CCLOG("%s", "Device is iPhone 3.5 inch Retina\n");
         
-        searchPaths.push_back("retina");
+        searchPaths.push_back("iphone_4_retina");
         director->setContentScaleFactor(640/640);
-    } else if (screenSize.width == 320) {
-        CCLOG("%s", "device is iPhone (non-retina)");
-        
-        searchPaths.push_back("regular");
-        director->setContentScaleFactor(320/640);
     }
     
-    FileUtils::getInstance()->setSearchPaths(searchPaths);
+    CCLOG("%s %.2f x %.2f", "Screen size is", screenSize.width, screenSize.height);
+    CCLOG("%s %.2f x %.2f", "Design resolution size is", eglView->getDesignResolutionSize().width, eglView->getDesignResolutionSize().height);
+    CCLOG("%s: %.2f", "Content scale factor is", director->getContentScaleFactor());
     
-    director->setAnimationInterval(1.0 / 60); // 60fps
+    CCLOG("%s", "Loading assets from: ");
+    
+    FileUtils::getInstance()->setSearchPaths(searchPaths);
 
+    for (std::string p : searchPaths) {
+        std::cout << "\t\t\t-> " + p << std::endl;
+    }
+    
     auto scene = HelloWorld::createScene();
 
+    director->setAnimationInterval(1.0 / 60); // 60fps
     director->runWithScene(scene);
 
     return true;

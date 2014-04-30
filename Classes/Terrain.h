@@ -27,7 +27,9 @@ public:
     
     virtual bool onTouchBegan(cocos2d::Touch *touch);
 private:
-    std::vector<cocos2d::Point> _hillKeyPoints;
+    std::vector<cocos2d::Point> _hillVertices;
+    std::vector<std::tuple<cocos2d::Point, cocos2d::Point>> _hillSegments;
+    
     cocos2d::CustomCommand _customCommand;
     
     Bomber::DynamicTerrainSprite *_bgTexture;

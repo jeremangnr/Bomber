@@ -44,37 +44,15 @@ void Terrain::draw()
 
 void Terrain::onDraw()
 {
-    Point p0 = this->_hillKeyPoints.front();
-    
     // draw hill segments
-    for (Point p1 : this->_hillKeyPoints) {
-//        glLineWidth(1);
-//        DrawPrimitives::setDrawColor4B(255, 255, 255, 255);
-//        DrawPrimitives::drawLine(p0, p1);
+    for(tuple<Point, Point> segment : this->_hillSegments) {
+        glLineWidth(3);
         
-        int hSegments = floorf((p1.x - p0.x) / HILL_SEGMENT_WIDTH);
+        Point p0 = get<0>(segment);
+        Point p1 = get<1>(segment);
         
-        float dx = (p1.x - p0.x) / hSegments;
-        float da = M_PI / hSegments;
-        float yMid = (p0.y + p1.y) / 2;
-        float ampl = (p0.y - p1.y) / 2;
-        
-        Point pt0, pt1;
-        pt0 = p0;
-        
-        for (int i = 0; i < hSegments + 1; ++i) {
-            pt1.x = p0.x + (i * dx);
-            pt1.y = yMid + ampl * cosf(da * i);
-            
-            glLineWidth(3);
-            
-            DrawPrimitives::setDrawColor4B(255, 0, 0, 255);
-            DrawPrimitives::drawLine(pt0, pt1);
-            
-            pt0 = pt1;
-        }
-        
-        p0 = p1;
+        DrawPrimitives::setDrawColor4B(255, 0, 0, 255);
+        DrawPrimitives::drawLine(p0, p1);
     }
     
     // add dark gradient for bg texture
@@ -89,10 +67,13 @@ void Terrain::onDraw()
     
     vertices[nVertices] = Point(VisibleRect::width(), VisibleRect::height());
     colors[nVertices++] = Color4F(0, 0, 0, 0 );
+    
     vertices[nVertices] = Point(0, VisibleRect::height());
     colors[nVertices++] = Color4F(0, 0, 0, 0);
+    
     vertices[nVertices] = Point(VisibleRect::width(), 0);
     colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
+    
     vertices[nVertices] = Point(0, 0);
     colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
     
@@ -100,6 +81,7 @@ void Terrain::onDraw()
     
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
     glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    
     glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
 }
@@ -107,7 +89,9 @@ void Terrain::onDraw()
 #pragma mark - Touch handling
 bool Terrain::onTouchBegan(Touch *touch)
 {
-    this->_hillKeyPoints.clear();
+    this->_hillVertices.clear();
+    this->_hillSegments.clear();
+    
     generateHills();
     
     return true;
@@ -121,9 +105,10 @@ void Terrain::generateHills()
     
     bool outOfScreen = false;
     
+    // generate key points first
     while (!outOfScreen) {
         Point hillPoint = Point(currentX, currentY);
-        this->_hillKeyPoints.push_back(hillPoint);
+        this->_hillVertices.push_back(hillPoint);
         
         currentX += MathUtils::randIntInRange(MIN_HILL_HORIZONTAL_DISTANCE, MAX_HILL_HORIZONTAL_DISTANCE);
         currentY = MathUtils::randIntInRange(MIN_HILL_VERTICAL_DISTANCE, VisibleRect::height() - HILL_TOP_OFFSET);
@@ -132,8 +117,36 @@ void Terrain::generateHills()
             outOfScreen = true;
             
             Point finalPoint = Point(VisibleRect::width(), currentY);
-            this->_hillKeyPoints.push_back(finalPoint);
+            this->_hillVertices.push_back(finalPoint);
         }
+    }
+    
+    // generate points for the curved line
+    Point p0 = this->_hillVertices.front();
+    
+    for (Point p1 : this->_hillVertices) {
+        int hSegments = floorf((p1.x - p0.x) / HILL_SEGMENT_WIDTH);
+        
+        float dx = (p1.x - p0.x) / hSegments;
+        float da = M_PI / hSegments;
+        float yMid = (p0.y + p1.y) / 2;
+        float ampl = (p0.y - p1.y) / 2;
+        
+        Point pt0, pt1;
+        pt0 = p0;
+        
+        for (int i = 0; i < hSegments + 1; ++i) {
+            pt1.x = p0.x + (i * dx);
+            pt1.y = yMid + ampl * cosf(da * i);
+            
+            // store segments as tuple<Point, Point> so we can use them when drawing
+            auto hillSegment = make_tuple(pt0, pt1);
+            this->_hillSegments.push_back(hillSegment);
+            
+            pt0 = pt1;
+        }
+        
+        p0 = p1;
     }
 }
 

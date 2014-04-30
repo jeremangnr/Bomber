@@ -1,7 +1,8 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "GameScene.h"
 
 USING_NS_CC;
+using namespace Bomber;
 
 AppDelegate::AppDelegate()
 {
@@ -46,7 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         std::cout << "\t\t\t-> " + p << std::endl;
     }
     
-    auto scene = HelloWorld::createScene();
+    auto scene = GameLayer::createScene();
 
     director->setAnimationInterval(1.0 / 60); // 60fps
     director->runWithScene(scene);

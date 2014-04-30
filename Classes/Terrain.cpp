@@ -7,11 +7,10 @@
 //
 
 #include "Terrain.h"
-#include "MathUtils.h"
-#include "VisibleRect.h"
 
 USING_NS_CC;
 using namespace std;
+using namespace Bomber;
 
 #define MAX_HILL_HORIZONTAL_DISTANCE 200
 #define MIN_HILL_HORIZONTAL_DISTANCE 40
@@ -23,6 +22,7 @@ using namespace std;
 Terrain::Terrain()
 {
     generateHills();
+    addBackground();
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
@@ -46,10 +46,11 @@ void Terrain::onDraw()
 {
     Point p0 = this->_hillKeyPoints.front();
     
+    // draw hill segments
     for (Point p1 : this->_hillKeyPoints) {
-        glLineWidth(1);
-        DrawPrimitives::setDrawColor4B(255, 255, 255, 255);
-        DrawPrimitives::drawLine(p0, p1);
+//        glLineWidth(1);
+//        DrawPrimitives::setDrawColor4B(255, 255, 255, 255);
+//        DrawPrimitives::drawLine(p0, p1);
         
         int hSegments = floorf((p1.x - p0.x) / HILL_SEGMENT_WIDTH);
         
@@ -65,7 +66,8 @@ void Terrain::onDraw()
             pt1.x = p0.x + (i * dx);
             pt1.y = yMid + ampl * cosf(da * i);
             
-            glLineWidth(4);
+            glLineWidth(3);
+            
             DrawPrimitives::setDrawColor4B(255, 0, 0, 255);
             DrawPrimitives::drawLine(pt0, pt1);
             
@@ -74,6 +76,32 @@ void Terrain::onDraw()
         
         p0 = p1;
     }
+    
+    // add dark gradient for bg texture
+    this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_COLOR));
+    
+    CC_NODE_DRAW_SETUP();
+    
+    float gradientAlpha = 0.7f;
+    Point vertices[4];
+    Color4F colors[4];
+    int nVertices = 0;
+    
+    vertices[nVertices] = Point(0, 0);
+    colors[nVertices++] = Color4F(0, 0, 0, 0 );
+    vertices[nVertices] = Point(VisibleRect::width(), 0);
+    colors[nVertices++] = Color4F(0, 0, 0, 0);
+    vertices[nVertices] = Point(0, VisibleRect::height());
+    colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
+    vertices[nVertices] = Point(VisibleRect::width(), VisibleRect::height());
+    colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
+    
+    GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION  | GL::VERTEX_ATTRIB_FLAG_COLOR);
+    
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, colors);
+    glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
 }
 
 #pragma mark - Touch handling
@@ -107,4 +135,14 @@ void Terrain::generateHills()
             this->_hillKeyPoints.push_back(finalPoint);
         }
     }
+}
+
+void Terrain::addBackground()
+{
+    DynamicTerrainSprite *terrainBg = DynamicTerrainSprite::createWithSizeColor(Size(VisibleRect::width(), VisibleRect::height()), ColorUtils::randomBrightColor());
+    terrainBg->setPosition(VisibleRect::center());
+    
+    // set z = -1 so it goes behind the terrain lines
+    this->addChild(terrainBg, -1);
+    this->_bgTexture = terrainBg;
 }

@@ -10,6 +10,11 @@
 #define __Bomber__Terrain__
 
 #include "cocos2d.h"
+#include "Bomber.h"
+
+#include "DynamicTerrainSprite.h"
+
+BOMBER_NS_START
 
 class Terrain : public cocos2d::Node
 {
@@ -25,7 +30,12 @@ private:
     std::vector<cocos2d::Point> _hillKeyPoints;
     cocos2d::CustomCommand _customCommand;
     
+    Bomber::DynamicTerrainSprite *_bgTexture;
+    
     void generateHills();
+    void addBackground();
 };
+
+BOMBER_NS_END
 
 #endif /* defined(__Bomber__Terrain__) */

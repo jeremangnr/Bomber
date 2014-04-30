@@ -8,10 +8,8 @@
 
 #include "DynamicTerrainSprite.h"
 
-#define kGradientColorStart Color4B(0, 0, 0, 0)
-#define kGradientColorEnd Color4B(0, 0, 0, 170)
-
 USING_NS_CC;
+using namespace Bomber;
 
 DynamicTerrainSprite* DynamicTerrainSprite::createWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color)
 {
@@ -27,14 +25,14 @@ DynamicTerrainSprite* DynamicTerrainSprite::createWithSizeColor(const cocos2d::S
 
 bool DynamicTerrainSprite::initWithSizeColor(const Size &size, const Color4F &color)
 {
-    RenderTexture *noiseTexture = this->noiseTextureWithSizeColor(size, color, true);
+    RenderTexture *noiseTexture = this->noiseTextureWithSizeColor(size, color);
     
     if (!Sprite::initWithTexture(noiseTexture->getSprite()->getTexture())) return false;
     
     return true;
 }
 
-RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color, bool gradient)
+RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color)
 {
     RenderTexture *rt = RenderTexture::create(size.width, size.height);
     
@@ -47,12 +45,6 @@ RenderTexture* DynamicTerrainSprite::noiseTextureWithSizeColor(const cocos2d::Si
     noise->visit();
     
     rt->end();
-    
-    if (gradient == true) {
-        LayerGradient *gradient = LayerGradient::create(kGradientColorStart, kGradientColorEnd);
-        this->addChild(gradient);
-        //gradient->setBlendFunc({GL_SRC_COLOR, GL_DST_COLOR}); // set this for colored gradient
-    }
     
     return rt;
 }

@@ -87,13 +87,13 @@ void Terrain::onDraw()
     Color4F colors[4];
     int nVertices = 0;
     
-    vertices[nVertices] = Point(0, 0);
-    colors[nVertices++] = Color4F(0, 0, 0, 0 );
-    vertices[nVertices] = Point(VisibleRect::width(), 0);
-    colors[nVertices++] = Color4F(0, 0, 0, 0);
-    vertices[nVertices] = Point(0, VisibleRect::height());
-    colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
     vertices[nVertices] = Point(VisibleRect::width(), VisibleRect::height());
+    colors[nVertices++] = Color4F(0, 0, 0, 0 );
+    vertices[nVertices] = Point(0, VisibleRect::height());
+    colors[nVertices++] = Color4F(0, 0, 0, 0);
+    vertices[nVertices] = Point(VisibleRect::width(), 0);
+    colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
+    vertices[nVertices] = Point(0, 0);
     colors[nVertices++] = Color4F(0, 0, 0, gradientAlpha);
     
     GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION  | GL::VERTEX_ATTRIB_FLAG_COLOR);

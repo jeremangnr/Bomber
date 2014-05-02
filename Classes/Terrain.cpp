@@ -22,7 +22,7 @@ using namespace Bomber;
 Terrain::Terrain()
 {
     generateHills();
-    addBackground();
+    generateBackground();
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
@@ -55,9 +55,22 @@ void Terrain::onDraw()
         DrawPrimitives::drawLine(p0, p1);
     }
     
+    // draw texture inside terrain shape
+    this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
+    CC_NODE_DRAW_SETUP();
+    
+    CCLOG("binding texture: %u", this->_terrainTexture->getTexture()->getName());
+    GL::bindTexture2D(this->_terrainTexture->getTexture()->getName());
+    GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORDS);
+    
+    DrawPrimitives::setDrawColor4F(1.0f, 1.0f, 1.0f, 1.0f);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 2, GL_FLOAT, GL_FALSE, 0, this->_hillVertices);
+    glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORDS, 2, GL_FLOAT, GL_FALSE, 0, this->_hillTexCoords);
+    
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)this->_nHillVertices);
+    
     // add dark gradient for bg texture
     this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_COLOR));
-    
     CC_NODE_DRAW_SETUP();
     
     float gradientAlpha = 0.7f;
@@ -89,10 +102,13 @@ void Terrain::onDraw()
 #pragma mark - Touch handling
 bool Terrain::onTouchBegan(Touch *touch)
 {
-    this->_hillVertices.clear();
+    this->_hillKeyPoints.clear();
     this->_hillSegments.clear();
     
     generateHills();
+    generateBackground();
+    
+    this->visit();
     
     return true;
 }
@@ -108,7 +124,7 @@ void Terrain::generateHills()
     // generate key points first
     while (!outOfScreen) {
         Point hillPoint = Point(currentX, currentY);
-        this->_hillVertices.push_back(hillPoint);
+        this->_hillKeyPoints.push_back(hillPoint);
         
         currentX += MathUtils::randIntInRange(MIN_HILL_HORIZONTAL_DISTANCE, MAX_HILL_HORIZONTAL_DISTANCE);
         currentY = MathUtils::randIntInRange(MIN_HILL_VERTICAL_DISTANCE, VisibleRect::height() - HILL_TOP_OFFSET);
@@ -117,14 +133,14 @@ void Terrain::generateHills()
             outOfScreen = true;
             
             Point finalPoint = Point(VisibleRect::width(), currentY);
-            this->_hillVertices.push_back(finalPoint);
+            this->_hillKeyPoints.push_back(finalPoint);
         }
     }
     
     // generate points for the curved line
-    Point p0 = this->_hillVertices.front();
+    Point p0 = this->_hillKeyPoints.front();
     
-    for (Point p1 : this->_hillVertices) {
+    for (Point p1 : this->_hillKeyPoints) {
         int hSegments = floorf((p1.x - p0.x) / HILL_SEGMENT_WIDTH);
         
         float dx = (p1.x - p0.x) / hSegments;
@@ -148,14 +164,58 @@ void Terrain::generateHills()
         
         p0 = p1;
     }
+    
+    // clean this up sometime
+    float minY = 0;
+    int hillPointsCount = this->_hillKeyPoints.size();
+    this->_nHillVertices = 0;
+    int nBorderVertices = 0;
+    Point borderVertices[800];
+    Point p1, pt0, pt1;
+    
+    p0 = this->_hillKeyPoints.front();
+    
+    for (int i = 0; i < hillPointsCount; i++) {
+        p1 = this->_hillKeyPoints[i];
+        
+        // triangle strip between p0 and p1
+        int hSegments = floorf((p1.x-p0.x) / HILL_SEGMENT_WIDTH);
+        float dx = (p1.x - p0.x) / hSegments;
+        float da = M_PI / hSegments;
+        float ymid = (p0.y + p1.y) / 2;
+        float ampl = (p0.y - p1.y) / 2;
+        pt0 = p0;
+        borderVertices[nBorderVertices++] = pt0;
+        for (int j=1; j<hSegments+1; j++) {
+            pt1.x = p0.x + j*dx;
+            pt1.y = ymid + ampl * cosf(da*j);
+            borderVertices[nBorderVertices++] = pt1;
+            
+            this->_hillVertices[this->_nHillVertices] = Point(pt0.x, 0 + minY);
+            this->_hillTexCoords[this->_nHillVertices++] = Point(pt0.x/512, 1.0f);
+            this->_hillVertices[this->_nHillVertices] = Point(pt1.x, 0 + minY);
+            this->_hillTexCoords[this->_nHillVertices++] = Point(pt1.x/512, 1.0f);
+            
+            this->_hillVertices[this->_nHillVertices] = Point(pt0.x, pt0.y);
+            this->_hillTexCoords[this->_nHillVertices++] = Point(pt0.x/512, 0);
+            this->_hillVertices[this->_nHillVertices] = Point(pt1.x, pt1.y);
+            this->_hillTexCoords[this->_nHillVertices++] = Point(pt1.x/512, 0);
+            
+            pt0 = pt1;
+        }
+        
+        p0 = p1;
+    }
 }
 
-void Terrain::addBackground()
+void Terrain::generateBackground()
 {
-    DynamicTerrainSprite *terrainBg = DynamicTerrainSprite::createWithSizeColor(Size(VisibleRect::width(), VisibleRect::height()), ColorUtils::randomBrightColor());
-    terrainBg->setPosition(VisibleRect::center());
+    if (this->_terrainTexture != nullptr) {
+        CC_SAFE_RELEASE_NULL(this->_terrainTexture);
+    }
     
-    // set z = -1 so it goes behind the terrain lines
-    this->addChild(terrainBg, -1);
-    this->_bgTexture = terrainBg;
+    DynamicTerrainSprite *terrainBg = DynamicTerrainSprite::createWithSizeColor(Size(VisibleRect::width(), VisibleRect::height()), ColorUtils::randomBrightColor());
+    terrainBg->retain();
+    
+    this->_terrainTexture = terrainBg;
 }

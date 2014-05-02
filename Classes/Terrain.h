@@ -9,6 +9,8 @@
 #ifndef __Bomber__Terrain__
 #define __Bomber__Terrain__
 
+#define MAX_HILL_VERTICES 4000
+
 #include "cocos2d.h"
 #include "Bomber.h"
 
@@ -27,15 +29,20 @@ public:
     
     virtual bool onTouchBegan(cocos2d::Touch *touch);
 private:
-    std::vector<cocos2d::Point> _hillVertices;
-    std::vector<std::tuple<cocos2d::Point, cocos2d::Point>> _hillSegments;
+    std::vector<cocos2d::Point> _hillKeyPoints; // for creating the hills
+    std::vector<std::tuple<cocos2d::Point, cocos2d::Point>> _hillSegments; // for drawing the hill as a curved line
+    
+    // for drawing the texture "under" the hill's shape
+    cocos2d::Point _hillVertices[MAX_HILL_VERTICES];
+    cocos2d::Point _hillTexCoords[MAX_HILL_VERTICES];
+    int _nHillVertices;
     
     cocos2d::CustomCommand _customCommand;
     
-    Bomber::DynamicTerrainSprite *_bgTexture;
+    Bomber::DynamicTerrainSprite *_terrainTexture;
     
     void generateHills();
-    void addBackground();
+    void generateBackground();
 };
 
 BOMBER_NS_END

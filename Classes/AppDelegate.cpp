@@ -14,9 +14,12 @@ AppDelegate::~AppDelegate()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
-    auto eglView = EGLView::getInstance();
+    auto eglView = director->getOpenGLView();
 
-    director->setOpenGLView(eglView);
+    if (!eglView) {
+        eglView = GLView::create("Bomber");
+        director->setOpenGLView(eglView);
+    }
     
     eglView->setDesignResolutionSize(1136, 640, ResolutionPolicy::FIXED_WIDTH);
     

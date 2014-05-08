@@ -24,21 +24,21 @@ public:
     Terrain();
     virtual ~Terrain();
     
-    virtual void draw() override;
-    virtual void onDraw();
+    virtual void draw(cocos2d::Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
+    virtual void onEnter() override;
     
+protected:
+    void onDraw(const kmMat4 &transform, bool transformUpdated);
     virtual bool onTouchBegan(cocos2d::Touch *touch);
+    
 private:
     std::vector<cocos2d::Point> _hillKeyPoints; // for creating the hills
     std::vector<std::tuple<cocos2d::Point, cocos2d::Point>> _hillSegments; // for drawing the hill as a curved line
-    
-    // for drawing the texture "under" the hill's shape
-    cocos2d::Point _hillVertices[MAX_HILL_VERTICES];
+    cocos2d::Point _hillVertices[MAX_HILL_VERTICES]; // for drawing the texture "under" the hill's shape
     cocos2d::Point _hillTexCoords[MAX_HILL_VERTICES];
     int _nHillVertices;
     
     cocos2d::CustomCommand _customCommand;
-    
     Bomber::DynamicTerrainSprite *_terrainTexture;
     
     void generateHills();

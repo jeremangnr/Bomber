@@ -21,8 +21,7 @@ using namespace Bomber;
 #pragma mark - Lifecycle
 Terrain::Terrain()
 {
-    generateHills();
-    generateBackground();
+    
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
@@ -35,18 +34,41 @@ Terrain::~Terrain()
 }
 
 #pragma mark - Overrides
-void Terrain::draw()
+void Terrain::onEnter()
+{
+    Node::onEnter();
+    
+    generateHills();
+    generateBackground();
+}
+
+void Terrain::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
     _customCommand.init(_globalZOrder);
-    _customCommand.func = CC_CALLBACK_0(Terrain::onDraw, this);
+    _customCommand.func = CC_CALLBACK_0(Terrain::onDraw, this, transform, transformUpdated);
     Director::getInstance()->getRenderer()->addCommand(&_customCommand);
 }
 
-void Terrain::onDraw()
+void Terrain::onDraw(const kmMat4 &transform, bool transformUpdated)
 {
+    kmGLPushMatrix();
+    kmGLLoadMatrix(&transform);
+    
+    // debug hill key points
+    Point p0 = this->_hillKeyPoints.front();
+    
+    for (Point p1 : this->_hillKeyPoints) {
+        glLineWidth(2);
+        
+        DrawPrimitives::setDrawColor4B(0, 255, 0, 255);
+        DrawPrimitives::drawLine(p0, p1);
+        
+        p0 = p1;
+    }
+    
     // draw hill segments
     for(tuple<Point, Point> segment : this->_hillSegments) {
-        glLineWidth(3);
+        glLineWidth(2);
         
         Point p0 = get<0>(segment);
         Point p1 = get<1>(segment);
@@ -59,7 +81,6 @@ void Terrain::onDraw()
     this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
     CC_NODE_DRAW_SETUP();
     
-    CCLOG("binding texture: %u", this->_terrainTexture->getTexture()->getName());
     GL::bindTexture2D(this->_terrainTexture->getTexture()->getName());
     GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORDS);
     
@@ -97,6 +118,8 @@ void Terrain::onDraw()
     
     glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
+    
+    kmGLPopMatrix();
 }
 
 #pragma mark - Touch handling

@@ -148,9 +148,6 @@ bool Terrain::onTouchBegan(Touch *touch)
     this->_hillSegments.clear();
     
     generateHills();
-    generateBackgroundTexture();
-    
-    this->visit();
     
     return true;
 }

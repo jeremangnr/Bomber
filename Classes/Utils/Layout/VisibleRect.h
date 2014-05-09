@@ -20,6 +20,7 @@ public:
     static cocos2d::Point rightTop();
     static cocos2d::Point leftBottom();
     static cocos2d::Point rightBottom();
+    static cocos2d::Point middle();
 private:
     static void lazyInit();
     static cocos2d::Rect s_visibleRect;

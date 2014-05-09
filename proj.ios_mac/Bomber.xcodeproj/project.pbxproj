@@ -35,14 +35,15 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F94191D32650061C5A8 /* GLES-Render.cpp */; };
+		A7445F9B191D5A9F0061C5A8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F99191D5A9F0061C5A8 /* GameScene.cpp */; };
+		A7445F9E191D5AAC0061C5A8 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F9C191D5AAC0061C5A8 /* Terrain.cpp */; };
+		A7445FA4191D5B550061C5A8 /* MenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445FA2191D5B550061C5A8 /* MenuScene.cpp */; };
 		A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */; };
-		A7FACF47191C104B003AA9AD /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF40191C104B003AA9AD /* GameScene.cpp */; };
 		A7FACF4C191C1076003AA9AD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = A7FACF4A191C1076003AA9AD /* fonts */; };
 		A7FACF4D191C1076003AA9AD /* iphone_4_retina in Resources */ = {isa = PBXBuildFile; fileRef = A7FACF4B191C1076003AA9AD /* iphone_4_retina */; };
 		A7FACF66191C1294003AA9AD /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF5E191C1294003AA9AD /* ColorUtils.cpp */; };
 		A7FACF67191C1294003AA9AD /* VisibleRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF61191C1294003AA9AD /* VisibleRect.cpp */; };
 		A7FACF68191C1294003AA9AD /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF64191C1294003AA9AD /* MathUtils.cpp */; };
-		A7FACF69191C1788003AA9AD /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF42191C104B003AA9AD /* Terrain.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -165,14 +166,16 @@
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		A7445F94191D32650061C5A8 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
 		A7445F95191D32650061C5A8 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
+		A7445F99191D5A9F0061C5A8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/Scenes/GameScene.cpp; sourceTree = "<group>"; };
+		A7445F9A191D5A9F0061C5A8 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/Scenes/GameScene.h; sourceTree = "<group>"; };
+		A7445F9C191D5AAC0061C5A8 /* Terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Terrain.cpp; path = ../Classes/Sprites/Terrain.cpp; sourceTree = "<group>"; };
+		A7445F9D191D5AAC0061C5A8 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Classes/Sprites/Terrain.h; sourceTree = "<group>"; };
+		A7445FA2191D5B550061C5A8 /* MenuScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuScene.cpp; path = ../Classes/Scenes/MenuScene.cpp; sourceTree = "<group>"; };
+		A7445FA3191D5B550061C5A8 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuScene.h; path = ../Classes/Scenes/MenuScene.h; sourceTree = "<group>"; };
 		A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		A7FACF3B191C104B003AA9AD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		A7FACF3C191C104B003AA9AD /* Bomber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bomber.h; path = ../Classes/Bomber.h; sourceTree = "<group>"; };
 		A7FACF3D191C104B003AA9AD /* BomberConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BomberConstants.h; path = ../Classes/BomberConstants.h; sourceTree = "<group>"; };
-		A7FACF40191C104B003AA9AD /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
-		A7FACF41191C104B003AA9AD /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
-		A7FACF42191C104B003AA9AD /* Terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Terrain.cpp; path = ../Classes/Terrain.cpp; sourceTree = "<group>"; };
-		A7FACF43191C104B003AA9AD /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Classes/Terrain.h; sourceTree = "<group>"; };
 		A7FACF4A191C1076003AA9AD /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		A7FACF4B191C1076003AA9AD /* iphone_4_retina */ = {isa = PBXFileReference; lastKnownFileType = folder; path = iphone_4_retina; sourceTree = "<group>"; };
 		A7FACF5E191C1294003AA9AD /* ColorUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorUtils.cpp; sourceTree = "<group>"; };
@@ -234,15 +237,13 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A7445F98191D5A600061C5A8 /* Sprites */,
+				A7445F97191D593A0061C5A8 /* Scenes */,
 				A7FACF5D191C1294003AA9AD /* Utils */,
 				A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */,
 				A7FACF3B191C104B003AA9AD /* AppDelegate.h */,
 				A7FACF3C191C104B003AA9AD /* Bomber.h */,
 				A7FACF3D191C104B003AA9AD /* BomberConstants.h */,
-				A7FACF40191C104B003AA9AD /* GameScene.cpp */,
-				A7FACF41191C104B003AA9AD /* GameScene.h */,
-				A7FACF42191C104B003AA9AD /* Terrain.cpp */,
-				A7FACF43191C104B003AA9AD /* Terrain.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -366,6 +367,26 @@
 				A7445F95191D32650061C5A8 /* GLES-Render.h */,
 			);
 			name = Debug;
+			sourceTree = "<group>";
+		};
+		A7445F97191D593A0061C5A8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A7445F99191D5A9F0061C5A8 /* GameScene.cpp */,
+				A7445F9A191D5A9F0061C5A8 /* GameScene.h */,
+				A7445FA2191D5B550061C5A8 /* MenuScene.cpp */,
+				A7445FA3191D5B550061C5A8 /* MenuScene.h */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		A7445F98191D5A600061C5A8 /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				A7445F9C191D5AAC0061C5A8 /* Terrain.cpp */,
+				A7445F9D191D5AAC0061C5A8 /* Terrain.h */,
+			);
+			name = Sprites;
 			sourceTree = "<group>";
 		};
 		A7FACF5D191C1294003AA9AD /* Utils */ = {
@@ -534,14 +555,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7FACF68191C1294003AA9AD /* MathUtils.cpp in Sources */,
+				A7445FA4191D5B550061C5A8 /* MenuScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */,
 				A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */,
+				A7445F9E191D5AAC0061C5A8 /* Terrain.cpp in Sources */,
 				A7FACF66191C1294003AA9AD /* ColorUtils.cpp in Sources */,
 				A7FACF67191C1294003AA9AD /* VisibleRect.cpp in Sources */,
-				A7FACF69191C1788003AA9AD /* Terrain.cpp in Sources */,
-				A7FACF47191C104B003AA9AD /* GameScene.cpp in Sources */,
+				A7445F9B191D5A9F0061C5A8 /* GameScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

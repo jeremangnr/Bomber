@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-#include "GameScene.h"
+#include "MenuScene.h"
 
 USING_NS_CC;
 using namespace Bomber;
@@ -26,6 +26,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     Size screenSize = eglView->getFrameSize();
     std::vector<std::string> searchPaths;
     
+    searchPaths.push_back("fonts");
+    
     if (screenSize.width == 1136) {
         CCLOG("%s", "Device is iPhone 4 inch\n");
         
@@ -50,7 +52,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         std::cout << "\t\t\t-> " + p << std::endl;
     }
     
-    auto scene = GameLayer::createScene();
+    auto scene = MenuLayer::createScene();
 
     director->setAnimationInterval(1.0 / 60); // 60fps
     director->runWithScene(scene);

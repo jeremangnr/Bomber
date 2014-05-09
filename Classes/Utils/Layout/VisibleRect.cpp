@@ -85,3 +85,9 @@ Point VisibleRect::rightBottom()
     lazyInit();
     return Point(s_visibleRect.origin.x+s_visibleRect.size.width, s_visibleRect.origin.y);
 }
+
+Point VisibleRect::middle()
+{
+    lazyInit();
+    return Point(s_visibleRect.size.width / 2, s_visibleRect.size.height / 2);
+}

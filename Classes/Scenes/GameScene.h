@@ -12,6 +12,7 @@ class GameLayer : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
+    CREATE_FUNC(GameLayer);
     
     virtual void update(float dt);
     virtual bool onTouchBegan(cocos2d::Touch *touch);
@@ -19,8 +20,6 @@ public:
     virtual void onExit() override;
     
     void createTestBodyAtPosition(cocos2d::Point position);
-    
-    CREATE_FUNC(GameLayer);
     
 private:
     b2World *_physicsWorld;

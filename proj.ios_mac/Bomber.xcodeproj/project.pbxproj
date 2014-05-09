@@ -34,6 +34,7 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F94191D32650061C5A8 /* GLES-Render.cpp */; };
 		A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */; };
 		A7FACF47191C104B003AA9AD /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF40191C104B003AA9AD /* GameScene.cpp */; };
 		A7FACF4C191C1076003AA9AD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = A7FACF4A191C1076003AA9AD /* fonts */; };
@@ -162,6 +163,8 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		A7445F94191D32650061C5A8 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
+		A7445F95191D32650061C5A8 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		A7FACF3B191C104B003AA9AD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		A7FACF3C191C104B003AA9AD /* Bomber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bomber.h; path = ../Classes/Bomber.h; sourceTree = "<group>"; };
@@ -356,11 +359,21 @@
 			path = ../Resources;
 			sourceTree = "<group>";
 		};
+		A7445F90191D31970061C5A8 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				A7445F94191D32650061C5A8 /* GLES-Render.cpp */,
+				A7445F95191D32650061C5A8 /* GLES-Render.h */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
 		A7FACF5D191C1294003AA9AD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				A7FACF5E191C1294003AA9AD /* ColorUtils.cpp */,
 				A7FACF5F191C1294003AA9AD /* ColorUtils.h */,
+				A7445F90191D31970061C5A8 /* Debug */,
 				A7FACF60191C1294003AA9AD /* Layout */,
 				A7FACF63191C1294003AA9AD /* Math */,
 			);
@@ -524,6 +537,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */,
+				A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */,
 				A7FACF66191C1294003AA9AD /* ColorUtils.cpp in Sources */,
 				A7FACF67191C1294003AA9AD /* VisibleRect.cpp in Sources */,
 				A7FACF69191C1788003AA9AD /* Terrain.cpp in Sources */,

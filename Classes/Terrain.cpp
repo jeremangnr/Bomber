@@ -41,13 +41,6 @@ namespace  {
 #pragma mark - Lifecycle
 Terrain::Terrain()
 {
-    generateBackgroundTexture();
-    generateHills();
-    
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
-    
-    this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
 Terrain::~Terrain()
@@ -55,12 +48,47 @@ Terrain::~Terrain()
     if (this->_terrainTexture != nullptr) CC_SAFE_RELEASE_NULL(this->_terrainTexture);
 }
 
-#pragma mark - Overrides
-void Terrain::onEnter()
+Terrain* Terrain::create(b2World *physicsWorld)
 {
-    Node::onEnter();
+    Terrain *pRet = new Terrain();
+    if (pRet && pRet->init(physicsWorld)) {
+        pRet->autorelease();
+        return pRet;
+    } else {
+        CC_SAFE_DELETE(pRet);
+        return NULL;
+    }
 }
 
+bool Terrain::init(b2World *physicsWorld)
+{
+    assert(physicsWorld != NULL);
+    
+    this->_physicsWorld = physicsWorld;
+    
+    generateBackgroundTexture();
+    generateHills();
+    generatePhysicsBody();
+    setupDebugDrawing();
+    
+    auto touchListener = EventListenerTouchOneByOne::create();
+    touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
+    
+    return true;
+}
+
+#pragma mark - Touch handling
+bool Terrain::onTouchBegan(Touch *touch)
+{
+    this->_hillKeyPoints.clear();
+    this->_hillSegments.clear();
+    
+    generateHills();
+    
+    return true;
+}
+
+#pragma mark - Overrides
 void Terrain::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
     _customCommand.init(_globalZOrder);
@@ -138,21 +166,38 @@ void Terrain::onDraw(const kmMat4 &transform, bool transformUpdated)
     glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei)nVertices);
     
+    this->_physicsWorld->DrawDebugData();
+    
     kmGLPopMatrix();
 }
 
-#pragma mark - Touch handling
-bool Terrain::onTouchBegan(Touch *touch)
+#pragma mark - Private
+void Terrain::setupDebugDrawing()
 {
-    this->_hillKeyPoints.clear();
-    this->_hillSegments.clear();
-    
-    generateHills();
-    
-    return true;
+    this->_debugDraw = new GLESDebugDraw(PTM_RATIO);
+    this->_physicsWorld->SetDebugDraw(this->_debugDraw);
+    this->_debugDraw->SetFlags(GLESDebugDraw::e_shapeBit | GLESDebugDraw::e_jointBit);
 }
 
-#pragma mark - Private
+void Terrain::generatePhysicsBody()
+{
+    b2BodyDef bodyDef;
+    bodyDef.position.Set(0, 0);
+    
+    this->_physicsBody = this->_physicsWorld->CreateBody(&bodyDef);
+    
+    b2EdgeShape edge;
+    b2Vec2 p1, p2;
+    
+    for (int i = 0; i < this->_nBorderVertices-1; i++) {
+        p1 = b2Vec2(this->_borderVertices[i].x / PTM_RATIO, this->_borderVertices[i].y / PTM_RATIO);
+        p2 = b2Vec2(this->_borderVertices[i+1].x / PTM_RATIO, this->_borderVertices[i+1].y / PTM_RATIO);
+        
+        edge.Set(p1, p2);
+        this->_physicsBody->CreateFixture(&edge, 0);
+    }
+}
+
 void Terrain::generateHills()
 {
     float currentX = 0;
@@ -204,17 +249,14 @@ void Terrain::generateHills()
         p0 = p1;
     }
     
-    // clean this up sometime
-    float minY = 0;
-    int hillPointsCount = this->_hillKeyPoints.size();
     this->_nHillVertices = 0;
-    int nBorderVertices = 0;
-    Point borderVertices[800];
+    this->_nBorderVertices = 0;
     Point p1, pt0, pt1;
     
     p0 = this->_hillKeyPoints.front();
     
-    for (int i = 0; i < hillPointsCount; i++) {
+    // this will generate the points for the triangle strips of the texture to be drawn "under" the terrain limit
+    for (int i = 0; i < this->_hillKeyPoints.size(); i++) {
         p1 = this->_hillKeyPoints[i];
         
         // triangle strip between p0 and p1
@@ -223,16 +265,18 @@ void Terrain::generateHills()
         float da = M_PI / hSegments;
         float ymid = (p0.y + p1.y) / 2;
         float ampl = (p0.y - p1.y) / 2;
+        
         pt0 = p0;
-        borderVertices[nBorderVertices++] = pt0;
+        this->_borderVertices[this->_nBorderVertices++] = pt0;
+        
         for (int j=1; j<hSegments+1; j++) {
             pt1.x = p0.x + j*dx;
             pt1.y = ymid + ampl * cosf(da*j);
-            borderVertices[nBorderVertices++] = pt1;
+            this->_borderVertices[this->_nBorderVertices++] = pt1;
             
-            this->_hillVertices[this->_nHillVertices] = Point(pt0.x, 0 + minY);
+            this->_hillVertices[this->_nHillVertices] = Point(pt0.x, 0);
             this->_hillTexCoords[this->_nHillVertices++] = Point(pt0.x/512, 1.0f);
-            this->_hillVertices[this->_nHillVertices] = Point(pt1.x, 0 + minY);
+            this->_hillVertices[this->_nHillVertices] = Point(pt1.x, 0);
             this->_hillTexCoords[this->_nHillVertices++] = Point(pt1.x/512, 1.0f);
             
             this->_hillVertices[this->_nHillVertices] = Point(pt0.x, pt0.y);

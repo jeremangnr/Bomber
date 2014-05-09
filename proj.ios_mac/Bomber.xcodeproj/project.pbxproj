@@ -35,7 +35,6 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF3A191C104B003AA9AD /* AppDelegate.cpp */; };
-		A7FACF46191C104B003AA9AD /* DynamicTerrainSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF3E191C104B003AA9AD /* DynamicTerrainSprite.cpp */; };
 		A7FACF47191C104B003AA9AD /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7FACF40191C104B003AA9AD /* GameScene.cpp */; };
 		A7FACF4C191C1076003AA9AD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = A7FACF4A191C1076003AA9AD /* fonts */; };
 		A7FACF4D191C1076003AA9AD /* iphone_4_retina in Resources */ = {isa = PBXBuildFile; fileRef = A7FACF4B191C1076003AA9AD /* iphone_4_retina */; };
@@ -167,8 +166,6 @@
 		A7FACF3B191C104B003AA9AD /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		A7FACF3C191C104B003AA9AD /* Bomber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bomber.h; path = ../Classes/Bomber.h; sourceTree = "<group>"; };
 		A7FACF3D191C104B003AA9AD /* BomberConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BomberConstants.h; path = ../Classes/BomberConstants.h; sourceTree = "<group>"; };
-		A7FACF3E191C104B003AA9AD /* DynamicTerrainSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DynamicTerrainSprite.cpp; path = ../Classes/DynamicTerrainSprite.cpp; sourceTree = "<group>"; };
-		A7FACF3F191C104B003AA9AD /* DynamicTerrainSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DynamicTerrainSprite.h; path = ../Classes/DynamicTerrainSprite.h; sourceTree = "<group>"; };
 		A7FACF40191C104B003AA9AD /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/GameScene.cpp; sourceTree = "<group>"; };
 		A7FACF41191C104B003AA9AD /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
 		A7FACF42191C104B003AA9AD /* Terrain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Terrain.cpp; path = ../Classes/Terrain.cpp; sourceTree = "<group>"; };
@@ -239,8 +236,6 @@
 				A7FACF3B191C104B003AA9AD /* AppDelegate.h */,
 				A7FACF3C191C104B003AA9AD /* Bomber.h */,
 				A7FACF3D191C104B003AA9AD /* BomberConstants.h */,
-				A7FACF3E191C104B003AA9AD /* DynamicTerrainSprite.cpp */,
-				A7FACF3F191C104B003AA9AD /* DynamicTerrainSprite.h */,
 				A7FACF40191C104B003AA9AD /* GameScene.cpp */,
 				A7FACF41191C104B003AA9AD /* GameScene.h */,
 				A7FACF42191C104B003AA9AD /* Terrain.cpp */,
@@ -533,7 +528,6 @@
 				A7FACF67191C1294003AA9AD /* VisibleRect.cpp in Sources */,
 				A7FACF69191C1788003AA9AD /* Terrain.cpp in Sources */,
 				A7FACF47191C104B003AA9AD /* GameScene.cpp in Sources */,
-				A7FACF46191C104B003AA9AD /* DynamicTerrainSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

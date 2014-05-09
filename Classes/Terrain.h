@@ -14,8 +14,6 @@
 #include "cocos2d.h"
 #include "Bomber.h"
 
-#include "DynamicTerrainSprite.h"
-
 BOMBER_NS_START
 
 class Terrain : public cocos2d::Node
@@ -39,10 +37,10 @@ private:
     int _nHillVertices;
     
     cocos2d::CustomCommand _customCommand;
-    Bomber::DynamicTerrainSprite *_terrainTexture;
+    cocos2d::RenderTexture *_terrainTexture;
     
     void generateHills();
-    void generateBackground();
+    void generateBackgroundTexture();
 };
 
 BOMBER_NS_END

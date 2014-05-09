@@ -18,10 +18,31 @@ using namespace Bomber;
 #define HILL_TOP_OFFSET 200
 #define HILL_SEGMENT_WIDTH 5
 
+// helper function for creating the bg texture
+namespace  {
+    RenderTexture* noiseTextureWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color)
+    {
+        RenderTexture *rt = RenderTexture::create(size.width, size.height);
+        
+        rt->beginWithClear(color.r, color.g, color.b, color.a);
+        
+        // add noise
+        Sprite *noise = Sprite::create("noise.png");
+        noise->setBlendFunc({GL_DST_COLOR, GL_ZERO});
+        noise->setPosition(Point(size.width / 2, size.height / 2));
+        noise->visit();
+        
+        rt->end();
+        
+        return rt;
+    }
+}
+
 #pragma mark - Lifecycle
 Terrain::Terrain()
 {
-    
+    generateBackgroundTexture();
+    generateHills();
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
@@ -31,15 +52,13 @@ Terrain::Terrain()
 
 Terrain::~Terrain()
 {
+    if (this->_terrainTexture != nullptr) CC_SAFE_RELEASE_NULL(this->_terrainTexture);
 }
 
 #pragma mark - Overrides
 void Terrain::onEnter()
 {
     Node::onEnter();
-    
-    generateHills();
-    generateBackground();
 }
 
 void Terrain::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
@@ -81,7 +100,7 @@ void Terrain::onDraw(const kmMat4 &transform, bool transformUpdated)
     this->setShaderProgram(ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE));
     CC_NODE_DRAW_SETUP();
     
-    GL::bindTexture2D(this->_terrainTexture->getTexture()->getName());
+    GL::bindTexture2D(this->_terrainTexture->getSprite()->getTexture()->getName());
     GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_TEX_COORDS);
     
     DrawPrimitives::setDrawColor4F(1.0f, 1.0f, 1.0f, 1.0f);
@@ -129,7 +148,7 @@ bool Terrain::onTouchBegan(Touch *touch)
     this->_hillSegments.clear();
     
     generateHills();
-    generateBackground();
+    generateBackgroundTexture();
     
     this->visit();
     
@@ -231,14 +250,14 @@ void Terrain::generateHills()
     }
 }
 
-void Terrain::generateBackground()
+void Terrain::generateBackgroundTexture()
 {
     if (this->_terrainTexture != nullptr) {
         CC_SAFE_RELEASE_NULL(this->_terrainTexture);
     }
     
-    DynamicTerrainSprite *terrainBg = DynamicTerrainSprite::createWithSizeColor(Size(VisibleRect::width(), VisibleRect::height()), ColorUtils::randomBrightColor());
-    terrainBg->retain();
+    RenderTexture *rt = noiseTextureWithSizeColor(VisibleRect::getVisibleRect().size, ColorUtils::randomBrightColor());
+    rt->retain();
     
-    this->_terrainTexture = terrainBg;
+    this->_terrainTexture = rt;
 }

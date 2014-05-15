@@ -107,7 +107,7 @@ void Terrain::onDraw(const kmMat4 &transform, bool transformUpdated)
     for (Point p1 : this->_hillKeyPoints) {
         glLineWidth(2);
         
-        DrawPrimitives::setDrawColor4B(0, 255, 0, 255);
+        DrawPrimitives::setDrawColor4B(255, 255, 255, 255);
         DrawPrimitives::drawLine(p0, p1);
         
         p0 = p1;
@@ -293,10 +293,6 @@ void Terrain::generateHills()
 
 void Terrain::generateBackgroundTexture()
 {
-    if (this->_terrainTexture != nullptr) {
-        CC_SAFE_RELEASE_NULL(this->_terrainTexture);
-    }
-    
     RenderTexture *rt = noiseTextureWithSizeColor(VisibleRect::getVisibleRect().size, ColorUtils::randomBrightColor());
     rt->retain();
     

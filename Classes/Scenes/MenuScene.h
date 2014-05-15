@@ -21,6 +21,7 @@ public:
     CREATE_FUNC(MenuLayer);
     
     void menuCallbackPlay(Ref *sender);
+    void menuCallbackConfig(Ref *sender);
 private:
     virtual bool init();
 };

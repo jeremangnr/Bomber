@@ -32,11 +32,17 @@ bool MenuLayer::init()
     
     this->addChild(title);
     
-    MenuItemFont *playItem = MenuItemFont::create("Play", CC_CALLBACK_1(MenuLayer::menuCallbackPlay, this));
-    playItem->setFontName("Marker Felt.ttf");
-    playItem->setFontSize(30);
+    MenuItemFont::setFontName("Marker Felt.ttf");
+    MenuItemFont::setFontSize(80);
     
-    Menu *mainMenu = Menu::create(playItem, NULL);
+    MenuItemFont *playItem = MenuItemFont::create("Play", CC_CALLBACK_1(MenuLayer::menuCallbackPlay, this));
+    MenuItemFont *configItem = MenuItemFont::create("Config", CC_CALLBACK_1(MenuLayer::menuCallbackConfig, this));
+    
+    Menu *mainMenu = Menu::create(playItem, configItem, NULL);
+    mainMenu->alignItemsVerticallyWithPadding(25);
+    
+    Point newPosition = Point(mainMenu->getPosition().x, mainMenu->getPosition().y - 50);
+    mainMenu->setPosition(newPosition);
     
     this->addChild(mainMenu);
     
@@ -48,4 +54,9 @@ void MenuLayer::menuCallbackPlay(Ref *sender)
 {
     auto gameScene = GameLayer::createScene();
     Director::getInstance()->replaceScene(TransitionZoomFlipAngular::create(2, gameScene));
+}
+
+void MenuLayer::menuCallbackConfig(Ref *sender)
+{
+    MessageBox("Config will be here", "Hey");
 }

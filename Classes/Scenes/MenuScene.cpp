@@ -39,8 +39,9 @@ bool MenuLayer::init()
     MenuItemFont *configItem = MenuItemFont::create("Config", CC_CALLBACK_1(MenuLayer::menuCallbackConfig, this));
     
     Menu *mainMenu = Menu::create(playItem, configItem, NULL);
-    mainMenu->alignItemsVerticallyWithPadding(25);
+    mainMenu->alignItemsVerticallyWithPadding(30);
     
+    // adjust offset from top
     Point newPosition = Point(mainMenu->getPosition().x, mainMenu->getPosition().y - 50);
     mainMenu->setPosition(newPosition);
     

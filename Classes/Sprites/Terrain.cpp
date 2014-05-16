@@ -41,6 +41,10 @@ namespace  {
 #pragma mark - Lifecycle
 Terrain::Terrain()
 {
+    this->_terrainTexture = nullptr;
+    this->_physicsWorld = nullptr;
+    this->_physicsBody = nullptr;
+    this->_debugDraw = nullptr;
 }
 
 Terrain::~Terrain()
@@ -56,13 +60,13 @@ Terrain* Terrain::create(b2World *physicsWorld)
         return pRet;
     } else {
         CC_SAFE_DELETE(pRet);
-        return NULL;
+        return nullptr;
     }
 }
 
 bool Terrain::init(b2World *physicsWorld)
 {
-    assert(physicsWorld != NULL);
+    assert(physicsWorld != nullptr);
     
     this->_physicsWorld = physicsWorld;
     
@@ -70,20 +74,6 @@ bool Terrain::init(b2World *physicsWorld)
     generateHills();
     generatePhysicsBody();
     setupDebugDrawing();
-    
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = CC_CALLBACK_1(Terrain::onTouchBegan, this);
-    
-    return true;
-}
-
-#pragma mark - Touch handling
-bool Terrain::onTouchBegan(Touch *touch)
-{
-    this->_hillKeyPoints.clear();
-    this->_hillSegments.clear();
-    
-    generateHills();
     
     return true;
 }

@@ -26,6 +26,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     Size screenSize = eglView->getFrameSize();
     std::vector<std::string> searchPaths;
     
+    // load these always by default
     searchPaths.push_back("fonts");
     
     if (screenSize.width == 1136) {

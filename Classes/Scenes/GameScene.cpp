@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "Terrain.h"
+#include "Tank.h"
 
 USING_NS_CC;
 using namespace Bomber;
@@ -21,6 +22,9 @@ bool GameLayer::init()
 
     setupPhysics();
     setupTerrain(this->_physicsWorld);
+    
+    Tank *tank = Tank::create(VisibleRect::center());
+    this->addChild(tank);
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(GameLayer::onTouchBegan, this);

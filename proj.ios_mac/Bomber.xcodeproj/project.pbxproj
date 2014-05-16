@@ -34,6 +34,7 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		A737968B192551B20015C045 /* Tank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7379689192551B20015C045 /* Tank.cpp */; };
 		A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F94191D32650061C5A8 /* GLES-Render.cpp */; };
 		A7445F9B191D5A9F0061C5A8 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F99191D5A9F0061C5A8 /* GameScene.cpp */; };
 		A7445F9E191D5AAC0061C5A8 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7445F9C191D5AAC0061C5A8 /* Terrain.cpp */; };
@@ -164,6 +165,8 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		A7379689192551B20015C045 /* Tank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tank.cpp; path = ../Classes/Tank.cpp; sourceTree = "<group>"; };
+		A737968A192551B20015C045 /* Tank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tank.h; path = ../Classes/Tank.h; sourceTree = "<group>"; };
 		A7445F94191D32650061C5A8 /* GLES-Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "GLES-Render.cpp"; sourceTree = "<group>"; };
 		A7445F95191D32650061C5A8 /* GLES-Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		A7445F99191D5A9F0061C5A8 /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameScene.cpp; path = ../Classes/Scenes/GameScene.cpp; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 			children = (
 				A7445F9C191D5AAC0061C5A8 /* Terrain.cpp */,
 				A7445F9D191D5AAC0061C5A8 /* Terrain.h */,
+				A7379689192551B20015C045 /* Tank.cpp */,
+				A737968A192551B20015C045 /* Tank.h */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				A7FACF68191C1294003AA9AD /* MathUtils.cpp in Sources */,
 				A7445FA4191D5B550061C5A8 /* MenuScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				A737968B192551B20015C045 /* Tank.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				A7FACF45191C104B003AA9AD /* AppDelegate.cpp in Sources */,
 				A7445F96191D32650061C5A8 /* GLES-Render.cpp in Sources */,

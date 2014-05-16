@@ -23,17 +23,22 @@ class Terrain : public cocos2d::Node
 {
 public:
     virtual ~Terrain();
-    
     virtual void draw(cocos2d::Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
     
     static Terrain* create(b2World *physicsWorld);
     
 protected:
     void onDraw(const kmMat4 &transform, bool transformUpdated);
-    virtual bool onTouchBegan(cocos2d::Touch *touch);
     
 private:
     Terrain();
+    
+    virtual bool init(b2World *physicsWorld);
+    
+    void setupDebugDrawing();
+    void generatePhysicsBody();
+    void generateHills();
+    void generateBackgroundTexture();
     
     std::vector<cocos2d::Point> _hillKeyPoints; // for creating the hills
     std::vector<std::tuple<cocos2d::Point, cocos2d::Point>> _hillSegments; // for drawing the hill as a curved line
@@ -49,13 +54,6 @@ private:
     b2World *_physicsWorld;
     b2Body *_physicsBody;
     GLESDebugDraw *_debugDraw;
-    
-    virtual bool init(b2World *physicsWorld);
-    
-    void setupDebugDrawing();
-    void generatePhysicsBody();
-    void generateHills();
-    void generateBackgroundTexture();
 };
 
 BOMBER_NS_END

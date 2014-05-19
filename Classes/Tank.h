@@ -20,6 +20,8 @@ class Tank : public cocos2d::Sprite
 public:
     virtual ~Tank();
     
+    void rotateCannon(float rotation);
+    
     static Tank* create(cocos2d::Point origin);
     
 private:

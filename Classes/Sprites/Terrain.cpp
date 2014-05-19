@@ -7,6 +7,8 @@
 //
 
 #include "Terrain.h"
+#include "MathUtils.h"
+#include "ColorUtils.h"
 
 USING_NS_CC;
 using namespace std;
@@ -18,6 +20,7 @@ using namespace Bomber;
 #define HILL_TOP_OFFSET 200
 #define HILL_SEGMENT_WIDTH 5
 
+#pragma mark - Helper
 // helper function for creating the bg texture
 namespace  {
     RenderTexture* noiseTextureWithSizeColor(const cocos2d::Size &size, const cocos2d::Color4F &color)
@@ -50,6 +53,7 @@ Terrain::Terrain()
 Terrain::~Terrain()
 {
     if (this->_terrainTexture != nullptr) CC_SAFE_RELEASE_NULL(this->_terrainTexture);
+    if (this->_debugDraw != nullptr) CC_SAFE_DELETE(this->_debugDraw);
 }
 
 Terrain* Terrain::create(b2World *physicsWorld)
@@ -159,6 +163,32 @@ void Terrain::onDraw(const kmMat4 &transform, bool transformUpdated)
     this->_physicsWorld->DrawDebugData();
     
     kmGLPopMatrix();
+}
+
+#pragma mark - Public
+Point Terrain::getRandomTerrainPoint()
+{
+    int pointIndex = MathUtils::randIntInRange(10, this->_hillSegments.size() - 10);
+    
+    auto segment = this->_hillSegments[pointIndex];
+    Point randPoint = get<0>(segment);
+    
+    return randPoint;
+}
+
+float Terrain::getRotationAngleForHillPoint(const cocos2d::Point p)
+{
+    for(tuple<Point, Point> segment : this->_hillSegments) {
+        Point p0 = get<0>(segment);
+        Point p1 = get<1>(segment);
+        
+        if (p0 == p || p1 == p) {
+            return MathUtils::angleFromVector(p0, p1);
+        }
+    }
+    
+    CCLOG("%s: The point (%f, %f) is not a part of the hill's line", __FUNCTION__, p.x, p.y);
+    return 0;
 }
 
 #pragma mark - Private

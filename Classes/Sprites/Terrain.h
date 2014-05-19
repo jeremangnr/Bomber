@@ -25,6 +25,9 @@ public:
     virtual ~Terrain();
     virtual void draw(cocos2d::Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
     
+    cocos2d::Point getRandomTerrainPoint();
+    float getRotationAngleForHillPoint(const cocos2d::Point p);
+    
     static Terrain* create(b2World *physicsWorld);
     
 protected:

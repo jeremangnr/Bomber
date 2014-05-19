@@ -1,6 +1,6 @@
 #include "GameScene.h"
-#include "Terrain.h"
 #include "Tank.h"
+#include "MathUtils.h"
 
 USING_NS_CC;
 using namespace Bomber;
@@ -22,12 +22,11 @@ bool GameLayer::init()
 
     setupPhysics();
     setupTerrain(this->_physicsWorld);
-    
-    Tank *tank = Tank::create(VisibleRect::center());
-    this->addChild(tank);
+    //setupTanks();
     
     auto touchListener = EventListenerTouchOneByOne::create();
     touchListener->onTouchBegan = CC_CALLBACK_1(GameLayer::onTouchBegan, this);
+    touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this);
     
     this->_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
     
@@ -39,6 +38,12 @@ void GameLayer::onEnter()
 {
     Layer::onEnter();
     Director::getInstance()->getScheduler()->scheduleUpdate(this, 1, false);
+}
+
+void GameLayer::onEnterTransitionDidFinish()
+{
+    Layer::onEnterTransitionDidFinish();
+    setupTanks();
 }
 
 void GameLayer::onExit()
@@ -59,14 +64,11 @@ void GameLayer::update(float dt)
         timeAccumulator = UPDATE_INTERVAL;
     }
     
-    int32 velocityIterations = 3;
-    int32 positionIterations = 2;
-    
     while (timeAccumulator >= UPDATE_INTERVAL) {
         timeAccumulator -= UPDATE_INTERVAL;
         
-        this->_physicsWorld->Step(UPDATE_INTERVAL, velocityIterations, positionIterations);
-        this->_physicsWorld->ClearForces();
+        this->_physicsWorld->Step(UPDATE_INTERVAL, 3, 2); // interval, velocity iterations, position iterations
+        this->_physicsWorld->ClearForces(); // i think this is not really necessary
     }
 }
 
@@ -91,12 +93,16 @@ void GameLayer::createTestBodyAtPosition(Point position)
 }
 
 #pragma mark - Touch handling
-bool GameLayer::onTouchBegan(cocos2d::Touch *touch)
+bool GameLayer::onTouchBegan(Touch *touch)
 {
-    Point touchPoint = this->convertTouchToNodeSpace(touch);
-    createTestBodyAtPosition(touchPoint);
-    
     return true;
+}
+
+void GameLayer::onTouchMoved(Touch *touch, Event *event)
+{
+    float rotation = MathUtils::angleFromVector(this->_tank->getPosition(), touch->getLocation());
+    
+    this->_tank->rotateCannon(rotation);
 }
 
 #pragma mark - Private
@@ -106,6 +112,8 @@ void GameLayer::setupTerrain(b2World *world)
     terrain->setPosition(Point::ZERO);
     
     this->addChild(terrain, 0);
+    
+    this->_terrain = terrain;
 }
 
 void GameLayer::setupPhysics()
@@ -114,4 +122,21 @@ void GameLayer::setupPhysics()
     
     this->_physicsWorld = new b2World(gravity);
     this->_physicsWorld->SetAllowSleeping(true);
+}
+
+void GameLayer::setupTanks()
+{
+    Point tankOrigin = this->_terrain->getRandomTerrainPoint();
+    
+    // place offscreen first
+    Tank *tank = Tank::create(Point(tankOrigin.x, VisibleRect::height()));
+    this->addChild(tank);
+    
+    this->_tank = tank;
+    // drop, bounce, and rotate to terrain angle
+    auto drop = EaseIn::create(MoveTo::create(0.3f, tankOrigin), 1);
+    auto bounce = EaseElasticOut::create(MoveBy::create(1.0f, Point(0, 10)));
+    auto rotate = RotateTo::create(0.1f, this->_terrain->getRotationAngleForHillPoint(tankOrigin));
+    
+    this->_tank->runAction(Sequence::create(drop, rotate, bounce, NULL));
 }

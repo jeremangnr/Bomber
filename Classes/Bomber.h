@@ -10,8 +10,6 @@
 #define Bomber_Bomber_h
 
 #include "BomberConstants.h"
-#include "ColorUtils.h"
-#include "MathUtils.h"
 #include "VisibleRect.h"
 
 #endif

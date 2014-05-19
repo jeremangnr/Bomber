@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "MenuScene.h"
+#include <iostream>
 
 USING_NS_CC;
 using namespace Bomber;
@@ -46,12 +47,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     CCLOG("%s: %.2f", "Content scale factor is", director->getContentScaleFactor());
     
     CCLOG("%s", "Loading assets from: ");
-    
-    FileUtils::getInstance()->setSearchPaths(searchPaths);
-
     for (std::string p : searchPaths) {
         std::cout << "\t\t\t-> " + p << std::endl;
     }
+    
+    FileUtils::getInstance()->setSearchPaths(searchPaths);
     
     auto scene = MenuLayer::createScene();
 

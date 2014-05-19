@@ -42,9 +42,19 @@ bool Tank::init(Point origin)
     this->setPosition(origin);
     
     Sprite *cannon = Sprite::create("cannon.png");
-    cannon->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2 + cannon->getContentSize().height / 2);
+    cannon->setPosition(this->getContentSize().width / 2, this->getContentSize().height / 2 + 5);
+    cannon->setAnchorPoint(Point(0.5, 0.1)); // set this so we can rotate the cannon properly
     
     this->addChild(cannon);
+    this->_cannon = cannon;
     
     return true;
+}
+
+#pragma mark - Public
+void Tank::rotateCannon(float rotation)
+{
+    assert(this->_cannon != nullptr);
+    
+    this->_cannon->setRotation(rotation);
 }

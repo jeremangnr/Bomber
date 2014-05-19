@@ -9,12 +9,13 @@
 #ifndef __Bomber__MathUtils__
 #define __Bomber__MathUtils__
 
-#include <iostream>
+#include "cocos2d.h"
 
 class MathUtils {
     
 public:
     static int randIntInRange(int min, int max);
+    static float angleFromVector(cocos2d::Point p0, cocos2d::Point p1);
 };
 
 #endif /* defined(__Bomber__MathUtils__) */

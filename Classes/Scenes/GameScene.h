@@ -5,6 +5,8 @@
 #include <Box2D/Box2D.h>
 
 #include "Bomber.h"
+#include "Terrain.h"
+#include "Tank.h"
 
 BOMBER_NS_START
 
@@ -15,19 +17,26 @@ public:
     CREATE_FUNC(GameLayer);
     
     virtual void update(float dt);
+    
     virtual bool onTouchBegan(cocos2d::Touch *touch);
+    virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event);
+    
     virtual void onEnter() override;
+    virtual void onEnterTransitionDidFinish() override;
     virtual void onExit() override;
     
     void createTestBodyAtPosition(cocos2d::Point position);
     
 private:
+    Terrain *_terrain;
+    Tank *_tank;
     b2World *_physicsWorld;
     
     virtual bool init();
     
-    void setupTerrain(b2World *world);
     void setupPhysics();
+    void setupTerrain(b2World *world);
+    void setupTanks();
 };
 
 BOMBER_NS_END
